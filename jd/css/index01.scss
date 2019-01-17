@@ -1,0 +1,79 @@
+@charset "utf-8";
+//导入 public.scss文件代码
+@import "public.scss";
+/*定义变量*/
+$size:20px;
+$color:red;
+#head{
+    font-size:$size;
+    color:$color;
+    width:200px;
+    height:200px;
+}
+#head1{
+    font-size:$size;
+    color:$color;
+    width:100px;
+    height:100px;
+}
+/*嵌套*/
+#nav{
+    @extend .comm;
+    width: 960px;
+    height: 30px;
+    line-height: 30px;
+    ul{
+        padding-left: 30px;
+        li{
+            float: left;
+            line-height: 30px;
+            padding: 0 20px;
+            a{
+                color: $color;
+                &:hover{
+                    color:red;
+                }
+            }
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}
+//sass代码重用  方式一、类的继承
+.comm{
+   width: 960px;
+   margin: 0 auto; 
+   height: 30px;
+   background: teal;
+}
+#header{
+    @extend .comm;
+    color:#000000;
+    border:1px solid #0033FF;
+}
+//sass代码重用  方式二、@mixin 没有参数
+@mixin public{
+    text-align: center;
+    list-style: none;
+}
+#main{
+    ul{
+        @include public;
+    }
+}
+//sass代码重用  方式二、@mixin 有参数
+@mixin public1($h,$color){
+    text-align: left;
+    background: #ff0;
+    height: $h;
+    color:$color;
+}
+#banner{
+    ul{
+        @include public1(400,pink);
+    }
+}
+@for $i from 1 to 3 {
+  .item-#{$i} { width: 2em * $i ; }    //   .item-1   .item-2  .item-3
+}
